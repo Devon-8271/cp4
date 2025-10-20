@@ -200,7 +200,8 @@ alu u_alu(
 
 assign address_dmem = alu_result[11:0];
 assign data = data_readRegB;
-assign wren = is_sw;
+assign wren = is_sw & ~reset;
+
 
 wire wr_from_lw, wr_from_alu;
 assign wr_from_lw  = is_lw;
@@ -236,7 +237,7 @@ assign rd_is_zero = ~( |wb_reg_final );
 wire will_write_normal;
 assign will_write_normal = wr_from_lw | wr_from_alu;
 
-assign ctrl_writeEnable = will_write_normal & (~rd_is_zero);
+assign ctrl_writeEnable = will_write_normal & (~rd_is_zero) & ~reset;
 assign ctrl_writeReg    = wb_reg_final;
 assign data_writeReg    = wb_data_final;
 
