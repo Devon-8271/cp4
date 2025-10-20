@@ -92,5 +92,11 @@ module skeleton(clock, reset, imem_clock, dmem_clock, processor_clock, regfile_c
         data_readRegA,                  // I: Data from port A of regfile
         data_readRegB                   // I: Data from port B of regfile
     );
+	 
+	 assign imem_clock      = clock;
+assign dmem_clock      = clock;
+assign processor_clock = clock;
+assign regfile_clock   = clock;
+
 
 endmodule
